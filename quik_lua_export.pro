@@ -4,8 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       -= core gui console app_bundle
-QMAKE_LFLAGS += -static-libgcc # to remove libgcc_s_dw2-1.dll dependance if mingw is used
+QT       -= core gui
+CONFIG -= console app_bundle
+QMAKE_LFLAGS += -static # to remove libgcc_s_dw2-1.dll dependance if mingw is used
 
 TARGET = quik_lua_export
 TEMPLATE = lib

@@ -51,7 +51,7 @@ int forOnAllTrade(lua_State *L)
     lua_getfield(L, -1, "datetime");
     if (!lua_istable(L, -1))
     {
-        luaL_error(L, "datatime is not a table");
+        luaL_error(L, "datetime is not a table");
     }
 
     int year = getNumberField(L, "year");
