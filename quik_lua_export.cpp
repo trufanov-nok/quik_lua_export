@@ -45,8 +45,8 @@ int forOnAllTrade(lua_State *L)
 
     data.code = getStringField(L, "sec_code");
     data.price = getNumberField(L, "price");
-    data.amount = getNumberField(L, "qty");
-    data.trade_id = getNumberField(L, "trade_num");
+    data.amount = (unsigned long) getNumberField(L, "qty");
+    data.trade_id = (unsigned long) getNumberField(L, "trade_num");
 
     lua_getfield(L, -1, "datetime");
     if (!lua_istable(L, -1))
@@ -54,13 +54,13 @@ int forOnAllTrade(lua_State *L)
         luaL_error(L, "datetime is not a table");
     }
 
-    int year = getNumberField(L, "year");
-    int month = getNumberField(L, "month");
-    int day = getNumberField(L, "day");
-    int hour = getNumberField(L, "hour");
-    int min = getNumberField(L, "min");
-    int sec = getNumberField(L, "sec");
-    int ms = getNumberField(L, "ms");
+    int year = (int) getNumberField(L, "year");
+    int month = (int) getNumberField(L, "month");
+    int day = (int) getNumberField(L, "day");
+    int hour = (int) getNumberField(L, "hour");
+    int min = (int) getNumberField(L, "min");
+    int sec = (int) getNumberField(L, "sec");
+    int ms = (int) getNumberField(L, "ms");
 
     //2015-11-06 18:44:59.473
     if ( sprintf(data.dat_time, "%d-%.2d-%.2d %.2d:%.2d:%.2d:%.3d", year, month, day, hour, min, sec, ms) > dat_time_buf)
@@ -70,7 +70,7 @@ int forOnAllTrade(lua_State *L)
 
     //FORTS csv format for features: "code;contract;price;amount;dat_time;trade_id;Nosystem"
     printf("%s;;%f;%Iu;%s;%Iu;0\n", data.code, data.price, data.amount, data.dat_time, data.trade_id);
-
+    fflush(stdout);
     return 0;
 }
 
@@ -84,7 +84,7 @@ int luaopen_quik_lua_export(lua_State *L) {
     return 0;
 }
 
-int main(int /*argc*/, char */*argv*/[])
+int main(int /*argc*/, char * /*argv*/[])
 {
     return 0;
 }
